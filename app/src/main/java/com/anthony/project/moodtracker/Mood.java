@@ -28,6 +28,11 @@ public class Mood {
         this.recordDate = recordDate;
     }
 
+
+    /*
+      Constructor for create  a mood not recorded by user
+      for historic of mood
+     */
     public Mood(LocalDate recordDate) {
 
         this.moodState = -1;
