@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private Button addMoodButton;
     private TextView text_view;
     private ArrayList<Mood> moodsData;
-
+    private MoodsPersistence moodsPersistence;
+    SingletonMoodsData singletonMoodsData  = SingletonMoodsData.getInstance();
     RecyclerView recyclerView;
 
 
@@ -58,7 +59,11 @@ public class MainActivity extends AppCompatActivity {
         viewPager2 = findViewById(R.id.viewPager2);
         historicButton = findViewById(R.id.btnHist);
         addMoodButton = findViewById(R.id.btnComm);
-
+        moodsPersistence = MoodsPersistence.getInstance(this);
+        //MoodsPersistence.removeAll();
+        singletonMoodsData.setArray(moodsPersistence.getMoodsData());
+        System.out.println("Test moods:" +moodsPersistence.getMoodsData().toString());
+        singletonMoodsData.getWeeklyMood();
 
         moodAdapter = new MoodAdapter(this, tableauImg);
         viewPager2.setAdapter(moodAdapter);
