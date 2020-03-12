@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -103,6 +104,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        historicButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+                startActivity(new Intent(getApplicationContext(), HistoricActivity.class));
+
+
+
+
+
+
+
+             }
+        });
 
     }
 
