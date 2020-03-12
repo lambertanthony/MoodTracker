@@ -82,12 +82,13 @@ public class MainActivity extends AppCompatActivity {
                 moodDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        String message ="Mood saved";
                         String   comment = commentInput.getText().toString().trim();
 
                         //saveData();
                        // System.out.println("Mood before save : " +new Mood(viewPager2.getCurrentItem(),comment, LocalDate.now()).toString());
                         //singletonMoodsData.addToArray(new Mood(viewPager2.getCurrentItem(),comment, LocalDate.now()));
-                        Toast.makeText(MainActivity.this, comment, Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
                     }
                 });
 
