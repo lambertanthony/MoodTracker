@@ -1,19 +1,27 @@
 package com.anthony.project.moodtracker;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.jakewharton.threetenabp.AndroidThreeTen;
+
+import org.threeten.bp.LocalDate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +67,38 @@ public class MainActivity extends AppCompatActivity {
                 super.onPageSelected(position);
                 viewPager2.setBackgroundColor(getResources().getColor(tableauFnd[position]));
                 Log.i("test position", "onPageSelected: position" + position);
+            }
+        });
+
+        addMoodButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder moodDialog = new AlertDialog.Builder(MainActivity.this);
+                moodDialog.setTitle("Comment for Mood state");
+                final EditText commentInput = new EditText(MainActivity.this);
+                commentInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+                moodDialog.setView(commentInput);
+
+                moodDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String   comment = commentInput.getText().toString().trim();
+
+                        //saveData();
+                       // System.out.println("Mood before save : " +new Mood(viewPager2.getCurrentItem(),comment, LocalDate.now()).toString());
+                        //singletonMoodsData.addToArray(new Mood(viewPager2.getCurrentItem(),comment, LocalDate.now()));
+                        Toast.makeText(MainActivity.this, comment, Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                moodDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                moodDialog.show();
+                commentInput.requestFocus();
             }
         });
 
