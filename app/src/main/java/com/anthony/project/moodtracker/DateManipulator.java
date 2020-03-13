@@ -30,7 +30,7 @@ public class DateManipulator {
 
     public static LocalDate getBeforeEightDays() {
         LocalDate currentDate = LocalDate.now();
-        return currentDate.minusDays(7);
+        return currentDate.minusDays(8);
     }
 
 

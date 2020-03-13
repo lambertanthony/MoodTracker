@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class HistoricRecyclerAdapter extends RecyclerView.Adapter<HistoricRecyclerAdapter.MyViewHolder> {
 
@@ -21,9 +22,11 @@ public class HistoricRecyclerAdapter extends RecyclerView.Adapter<HistoricRecycl
     LayoutInflater inflater;
 
 
-    public HistoricRecyclerAdapter(Context context, ArrayList<Mood> products) {
+    public HistoricRecyclerAdapter(Context context, ArrayList<Mood> moodsData) {
         inflater = LayoutInflater.from(context);
-        this.moodsList = products;
+        moodsData.remove(0);
+        Collections.reverse(moodsData);
+        this.moodsList = moodsData;
     }
 
 
@@ -113,6 +116,7 @@ public class HistoricRecyclerAdapter extends RecyclerView.Adapter<HistoricRecycl
                     params.width = displayWidth;
                     this.itemView.setBackgroundResource(R.color.banana_yellow);
                     break;
+
             }
             this.itemView.setLayoutParams(params);
             if (!(selectedMood.getComment().equals(""))){
