@@ -96,6 +96,10 @@ public class HistoricRecyclerAdapter extends RecyclerView.Adapter<HistoricRecycl
                     break;
             }
             switch (selectedMood.getMoodState()){
+                case -1:
+                    params.width = displayWidth;
+                    this.itemView.setBackgroundResource(R.color.pink);
+                    break;
                 case 0:
                     params.width = displayWidth * 20 / 100;
                     this.itemView.setBackgroundResource(R.color.faded_red);
@@ -132,11 +136,7 @@ public class HistoricRecyclerAdapter extends RecyclerView.Adapter<HistoricRecycl
                 commentImage.setImageResource(0);
             }
 
-            //this.productName.setText(selectedMood.getMoodState());
 
-
-
-            //this.commentImage.setImageResource(R.drawable.ic_launcher_background);
 
 
         }
@@ -145,9 +145,7 @@ public class HistoricRecyclerAdapter extends RecyclerView.Adapter<HistoricRecycl
         @Override
         public void onClick(View v) {
 
-            //Values are passing to activity & to fragment as well
-            //       Toast.makeText(MainActivity.this, "Single Click on position        :"+position,
-            //             Toast.LENGTH_SHORT).show();
+
         }
 
     }
