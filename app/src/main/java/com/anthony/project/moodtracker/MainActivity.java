@@ -89,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+       // viewPager2.setCurrentItem(3,false);
+
+
         addMoodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

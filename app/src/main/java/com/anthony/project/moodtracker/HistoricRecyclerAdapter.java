@@ -20,6 +20,7 @@ public class HistoricRecyclerAdapter extends RecyclerView.Adapter<HistoricRecycl
     ArrayList<Mood> moodsList;
     LayoutInflater inflater;
 
+
     public HistoricRecyclerAdapter(Context context, ArrayList<Mood> products) {
         inflater = LayoutInflater.from(context);
         this.moodsList = products;
@@ -31,7 +32,7 @@ public class HistoricRecyclerAdapter extends RecyclerView.Adapter<HistoricRecycl
         View view = inflater.inflate(R.layout.item_recyclerview, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
         Log.i("Hauteur" ,"Hauteur"+view.getHeight());
-
+        Log.i("Data from histor " ,moodsList.toString());
         return holder;
     }
 
@@ -39,10 +40,6 @@ public class HistoricRecyclerAdapter extends RecyclerView.Adapter<HistoricRecycl
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Mood displayedMood = moodsList.get(position);
         holder.setData(displayedMood, position);
-        // holder.
-
-        //float containerHeight = mRecyclerView.getHeight();
-        //holder.itemView.setMinimumHeight(Math.round(containerHeight/5));
 
     }
 
@@ -54,16 +51,15 @@ public class HistoricRecyclerAdapter extends RecyclerView.Adapter<HistoricRecycl
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView productName, productDescription;
-        ImageView productImage, deleteproduct;
+        TextView moodState;
+        ImageView commentImage;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            productName = (TextView) itemView.findViewById(R.id.item_recycler_view_text);
+            moodState = (TextView) itemView.findViewById(R.id.item_recycler_view_text);
 
-            productImage = (ImageView) itemView.findViewById(R.id.item_recycler_view_image);
-            //deleteproduct = (ImageView) itemView.findViewById(R.id.deleteproduct);
-            //deleteproduct.setOnClickListener(this);
+            commentImage = (ImageView) itemView.findViewById(R.id.item_recycler_view_image);
+
 
         }
 
@@ -75,25 +71,25 @@ public class HistoricRecyclerAdapter extends RecyclerView.Adapter<HistoricRecycl
             params.height = getMoodHeight();
             switch (position){
                 case 0:
-                    this.productName.setText("Il y a une semaine");
+                    this.moodState.setText("Il y a une semaine");
                     break;
                 case 1:
-                    this.productName.setText("Il y a six jours");
+                    this.moodState.setText("Il y a six jours");
                     break;
                 case 2:
-                    this.productName.setText("Il y a cinq jours");
+                    this.moodState.setText("Il y a cinq jours");
                     break;
                 case 3:
-                    this.productName.setText("Il y a quatre jours");
+                    this.moodState.setText("Il y a quatre jours");
                     break;
                 case 4:
-                    this.productName.setText("Il y a trois jours");
+                    this.moodState.setText("Il y a trois jours");
                     break;
                 case 5:
-                    this.productName.setText("Avant-hier");
+                    this.moodState.setText("Avant-hier");
                     break;
                 case 6:
-                    this.productName.setText("Hier");
+                    this.moodState.setText("Hier");
                     break;
             }
             switch (selectedMood.getMoodState()){
@@ -117,11 +113,15 @@ public class HistoricRecyclerAdapter extends RecyclerView.Adapter<HistoricRecycl
                     params.width = displayWidth;
                     this.itemView.setBackgroundResource(R.color.banana_yellow);
                     break;
+                default:
+                    params.width = displayWidth;
+                    this.itemView.setBackgroundResource(R.color.design_default_color_background);
+                    break;
             }
             this.itemView.setLayoutParams(params);
             if (!(selectedMood.getComment().equals(""))){
-                productImage.setImageResource(R.drawable.ic_comment_black_48px);
-                productImage.setOnClickListener(new View.OnClickListener() {
+                commentImage.setImageResource(R.drawable.ic_comment_black_48px);
+                commentImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(v.getContext(),"teste",Toast.LENGTH_SHORT).show();
@@ -129,14 +129,14 @@ public class HistoricRecyclerAdapter extends RecyclerView.Adapter<HistoricRecycl
                 });
 
             }else{
-                productImage.setImageResource(0);
+                commentImage.setImageResource(0);
             }
 
             //this.productName.setText(selectedMood.getMoodState());
 
 
 
-            //this.productImage.setImageResource(R.drawable.ic_launcher_background);
+            //this.commentImage.setImageResource(R.drawable.ic_launcher_background);
 
 
         }
