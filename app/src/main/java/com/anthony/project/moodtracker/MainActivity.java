@@ -49,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+
+
+
+
+
+
     }
 
     @Override
@@ -59,11 +65,18 @@ public class MainActivity extends AppCompatActivity {
         viewPager2 = findViewById(R.id.viewPager2);
         historicButton = findViewById(R.id.btnHist);
         addMoodButton = findViewById(R.id.btnComm);
-        moodsPersistence = MoodsPersistence.getInstance(this);
+       moodsPersistence = MoodsPersistence.getInstance(this);
         //MoodsPersistence.removeAll();
         singletonMoodsData.setArray(moodsPersistence.getMoodsData());
         System.out.println("Test moods:" +moodsPersistence.getMoodsData().toString());
         singletonMoodsData.getWeeklyMood();
+        System.out.println("Test2 moods:" +moodsPersistence.getMoodsData().toString());
+        LocalDate currentDate = LocalDate.now();
+        System.out.println("Date current :"+currentDate.toString());
+
+        System.out.println("Dates list "+ DateManipulator.getDatesBetween().toString());
+        singletonMoodsData.getWeeklyMood();
+       System.out.println("Test2 moods:" +singletonMoodsData.getArray().toString());
 
         moodAdapter = new MoodAdapter(this, tableauImg);
         viewPager2.setAdapter(moodAdapter);
@@ -90,11 +103,10 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String message ="Mood saved";
                         String   comment = commentInput.getText().toString().trim();
-
-                        //saveData();
-                       // System.out.println("Mood before save : " +new Mood(viewPager2.getCurrentItem(),comment, LocalDate.now()).toString());
-                        //singletonMoodsData.addToArray(new Mood(viewPager2.getCurrentItem(),comment, LocalDate.now()));
+                        singletonMoodsData.addToArray(new Mood(viewPager2.getCurrentItem(),comment, LocalDate.now()));
                         Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+                        singletonMoodsData.getWeeklyMood();
+                        moodsPersistence.saveMoodsData(singletonMoodsData.getArray());
                     }
                 });
 
@@ -152,4 +164,19 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        singletonMoodsData.getWeeklyMood();
+        moodsPersistence = MoodsPersistence.getInstance(this);
+        moodsPersistence.saveMoodsData(singletonMoodsData.getArray());
+
+    }
+
+
+
+
+
 }
