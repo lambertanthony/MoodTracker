@@ -113,10 +113,6 @@ public class HistoricRecyclerAdapter extends RecyclerView.Adapter<HistoricRecycl
                     params.width = displayWidth;
                     this.itemView.setBackgroundResource(R.color.banana_yellow);
                     break;
-                default:
-                    params.width = displayWidth;
-                    this.itemView.setBackgroundResource(R.color.design_default_color_background);
-                    break;
             }
             this.itemView.setLayoutParams(params);
             if (!(selectedMood.getComment().equals(""))){
