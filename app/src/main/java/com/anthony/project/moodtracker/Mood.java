@@ -85,8 +85,8 @@ public class Mood {
         ArrayList<Mood> moodsList = new ArrayList<Mood>();
         int moodsScore[] = {2, 3, 1, 4 ,0,1,2};
         String[] moodComment = {"Ca va", "Bof", "test etat","voiture en panne","je suis bien","Ca avance","je me sens bien"};
-        LocalDate[] recordDates = new LocalDate[]{ LocalDate.of(2020, 3, 5),LocalDate.of(2020, 3, 4),LocalDate.of(2020, 3, 3),LocalDate.of(2020, 3, 2),LocalDate.of(2020, 3, 1)
-                ,LocalDate.of(2020, 2, 29),LocalDate.of(2020, 2, 28)
+        LocalDate[] recordDates = new LocalDate[]{ LocalDate.of(2020, 3, 14),LocalDate.of(2020, 3, 13),LocalDate.of(2020, 3, 12),LocalDate.of(2020, 3, 11),LocalDate.of(2020, 3, 10)
+                ,LocalDate.of(2020, 3, 9),LocalDate.of(2020, 3, 8)
 
         };
         for (int i = 0; i < moodsScore.length; i++) {
