@@ -123,12 +123,13 @@ public class HistoricRecyclerAdapter extends RecyclerView.Adapter<HistoricRecycl
 
             }
             this.itemView.setLayoutParams(params);
-            if (!(selectedMood.getComment().equals(""))){
+            if (!(selectedMood.isNotExistMood())){
                 commentImage.setImageResource(R.drawable.ic_comment_black_48px);
+                final String comment = selectedMood.getComment();
                 commentImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(v.getContext(),"teste",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(v.getContext(),comment,Toast.LENGTH_SHORT).show();
                     }
                 });
 
