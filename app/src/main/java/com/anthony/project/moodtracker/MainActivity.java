@@ -2,6 +2,7 @@ package com.anthony.project.moodtracker;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -48,12 +49,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-
-
-
-
-
 
     }
 
@@ -129,11 +124,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-
                 startActivity(new Intent(getApplicationContext(), HistoricActivity.class));
-
-
-
 
 
 
@@ -154,16 +145,18 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.share_button:
-                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                sharingIntent.setType("text/plain");
-                String shareBody = "Moodtracker historic";
-                String shareSubject = "MoodTracker";
-                sharingIntent.putExtra(Intent.EXTRA_TEXT,shareBody);
-                sharingIntent.putExtra(Intent.EXTRA_SUBJECT,shareSubject);
-                startActivity(Intent.createChooser(sharingIntent, "Send Email"));
+                singletonMoodsData.getWeeklyMood();
+                moodsData = singletonMoodsData.getArray();
+                final String subject = "Moods rapport";
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.setData(Uri.parse("mailto:"));
+                String to = "sharingMood@example.com";
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+                emailIntent.putExtra(Intent.EXTRA_TEXT,  MailFormatter.mailMessage(moodsData));
+                emailIntent.setType("message/rfc822");
+                startActivity(Intent.createChooser(emailIntent, "Email"));
                 break;
-
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -175,9 +168,9 @@ public class MainActivity extends AppCompatActivity {
         singletonMoodsData.getWeeklyMood();
         moodsPersistence = MoodsPersistence.getInstance(this);
         moodsPersistence.saveMoodsData(singletonMoodsData.getArray());
+        //moodsPersistence.saveMoodsData(Mood.getData());
 
     }
-
 
 
 

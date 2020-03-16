@@ -123,7 +123,9 @@ public class HistoricRecyclerAdapter extends RecyclerView.Adapter<HistoricRecycl
 
             }
             this.itemView.setLayoutParams(params);
-            if (!(selectedMood.isNotExistMood())){
+            if (selectedMood.getMoodState() == -1 || (selectedMood.getComment().trim()).isEmpty()){
+                commentImage.setImageResource(0);
+            } else{
                 commentImage.setImageResource(R.drawable.ic_comment_black_48px);
                 final String comment = selectedMood.getComment();
                 commentImage.setOnClickListener(new View.OnClickListener() {
@@ -132,13 +134,7 @@ public class HistoricRecyclerAdapter extends RecyclerView.Adapter<HistoricRecycl
                         Toast.makeText(v.getContext(),comment,Toast.LENGTH_SHORT).show();
                     }
                 });
-
-            }else{
-                commentImage.setImageResource(0);
             }
-
-
-
 
         }
 

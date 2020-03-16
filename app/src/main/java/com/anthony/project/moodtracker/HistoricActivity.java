@@ -21,7 +21,8 @@ public class HistoricActivity extends AppCompatActivity {
         setContentView(R.layout.activity_historic);
         recyclerView = (RecyclerView) findViewById(R.id.activity_history_recycler_view);
         singletonMoodsData = SingletonMoodsData.getInstance();
-        arrayHistoric= singletonMoodsData.getArray();
+        //arrayHistoric= singletonMoodsData.getArray();
+       arrayHistoric = Mood.getData();
         HistoricRecyclerAdapter  moodRecyclerAdapter = new HistoricRecyclerAdapter(this,arrayHistoric);
         recyclerView.setAdapter(moodRecyclerAdapter);
 
